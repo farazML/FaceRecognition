@@ -4,9 +4,12 @@ import cv2
 
 
 def face_recognition(video, image):
+    try:
+        detection = Recognition()
+        face_src, embed_src, bbox_src, boxes_src, kps_src, det_score_src = detection.detection(image)
 
-    detection = Recognition()
-    face_src, embed_src, bbox_src, boxes_src, kps_src, det_score_src = detection.detection(image)
+    except:
+        raise Exception('something went wrong in detection module.')
 
     # these variables related to EyeBlinkDetector, Creating a list eye_blink_signal
     eye_blink_signal = []
@@ -19,6 +22,9 @@ def face_recognition(video, image):
 
     # this is for store similarity between source and detected embed vector
     similarity = []
+
+    if len(video) == 0:
+        raise Exception('video file is empty! check this.')
 
     for frame in video:
 
@@ -75,5 +81,3 @@ def face_recognition(video, image):
             break
 
     return flag_liveness, flag_verification
-
-
