@@ -1,7 +1,6 @@
 from Detection import *
 from LivenessDetection import *
 import cv2
-#changed
 
 def face_recognition(video, image):
     try:
